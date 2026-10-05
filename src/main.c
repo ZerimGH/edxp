@@ -20,7 +20,7 @@ int main(void) {
     while (cur->type != TOKEN_END) {
         char buf[1024] = {0};
         strncpy(buf, cur->value, cur->length);
-        printf("%d | %s | %zu\n", cur->type, buf, cur->length);
+        printf("type = %d | value = %s | length = %zu | line_no = %zu | char_no = %zu\n", cur->type, buf, cur->length, cur->line_no, cur->char_no);
         cur++;
     }
 
