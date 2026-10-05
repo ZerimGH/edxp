@@ -2,7 +2,7 @@
 
 include config.mk
 
-SRC = src/main.c
+SRC = src/main.c src/tokeniser.c src/logger.c
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall -Wextra -pedantic -Iinclude
