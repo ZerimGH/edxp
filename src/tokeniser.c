@@ -21,7 +21,7 @@ static int ends_token(char c) {
     return isspace(c);
 }
 
-struct token tokenise_keyword(char *src) {
+static struct token tokenise_keyword(char *src) {
     struct token res = {0};
     if (!src || !*src) return res;
 
@@ -54,7 +54,7 @@ static int is_identifier_char(char c) {
     return 0;
 }
 
-struct token tokenise_identifier(char *src) {
+static struct token tokenise_identifier(char *src) {
     struct token res = {0};
     if (!src || !*src) return res;
 
@@ -75,7 +75,7 @@ struct token tokenise_identifier(char *src) {
     return res;
 }
 
-struct token tokenise_integer_literal(char *src) {
+static struct token tokenise_integer_literal(char *src) {
     struct token res = {0};
     if (!src || !*src) return res;
 
