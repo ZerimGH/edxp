@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define BOLD "\033[1m"
 #define RED "\033[1;31m"
@@ -27,18 +28,19 @@ static void context(size_t line_no, size_t char_no, size_t length) {
     for (size_t i = 1; i < line_no; i++) {
         line = strchr(line, '\n');
         if (!line) return;
+        line++;
     }
 
     char *next = strchr(line, '\n');
-    char old;
-    if (next) {
-        old   = *next;
-        *next = '\0';
+    if (!next) next = strchr(line, '\0');
+    if (!next) return;
+
+    fprintf(stderr, "%6zu | ", line_no);
+    while (line != next) {
+        fputc(*line, stderr);
+        line++;
     }
-
-    if (next) *next = old;
-
-    fprintf(stderr, "%6zu | %s\n", line_no, line);
+    fputc('\n', stderr);
 
     /* Print underline */
     if (length) {
