@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 int main(void) {
-    const char *src = "SET Number TO -100";
+    const char * src = "SET Number TO -100";
 
     logger_init("NOFILE", (char *)src);
 
@@ -20,7 +20,7 @@ int main(void) {
     while (cur->type != TOKEN_EOF) {
         char buf[1024] = {0};
         strncpy(buf, cur->value, cur->length);
-        printf("type = %d | value = %s | length = %zu | line_no = %zu | char_no = %zu\n", cur->type, buf, cur->length, cur->line_no, cur->char_no);
+        printf("type = %-12d | value = %-12s | length = %-12zu | line_no = %-12zu | char_no = %-12zu\n", cur->type, buf, cur->length, cur->line_no, cur->char_no);
         cur++;
     }
 
