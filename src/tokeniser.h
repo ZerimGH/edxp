@@ -3,7 +3,28 @@
 
 #include <stddef.h>
 
-enum { TOKEN_SET, TOKEN_TO, TOKEN_IDENTIFIER, TOKEN_INTEGER_LITERAL, TOKEN_END };
+enum {
+    TOKEN_SET,
+    TOKEN_TO,
+    TOKEN_IF,
+    TOKEN_THEN,
+    TOKEN_END,
+    TOKEN_WHILE,
+    TOKEN_DO,
+    TOKEN_REPEAT,
+    TOKEN_UNTIL,
+    TOKEN_TIMES,
+    TOKEN_FOR,
+    TOKEN_FROM,
+    TOKEN_STEP,
+    TOKEN_EACH,
+    TOKEN_FOREACH,
+    TOKEN_SEND,
+    TOKEN_RECEIVE,
+    TOKEN_IDENTIFIER,
+    TOKEN_INTEGER_LITERAL,
+    TOKEN_EOF
+};
 
 struct token {
     int type;      /* Type of token */

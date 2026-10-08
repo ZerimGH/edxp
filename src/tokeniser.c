@@ -28,7 +28,24 @@ static struct token tokenise_keyword(char *src) {
     const struct {
         int type;
         const char *value;
-    } keywords[] = {{TOKEN_SET, "SET"}, {TOKEN_TO, "TO"}};
+    } keywords[] = {{TOKEN_SET, "SET"},
+        {TOKEN_TO, "TO"},
+        {TOKEN_IF, "IF"},
+        {TOKEN_THEN, "THEN"},
+        {TOKEN_END, "END"},
+        {TOKEN_WHILE, "WHILE"},
+        {TOKEN_DO, "DO"},
+        {TOKEN_REPEAT, "REPEAT"},
+        {TOKEN_UNTIL, "UNTIL"},
+        {TOKEN_TIMES, "TIMES"},
+        {TOKEN_FOR, "FOR"},
+        {TOKEN_FROM, "FROM"},
+        {TOKEN_TO, "TO"},
+        {TOKEN_STEP, "STEP"},
+        {TOKEN_EACH, "EACH"},
+        {TOKEN_FOREACH, "FOREACH"},
+        {TOKEN_SEND, "SEND"},
+        {TOKEN_RECEIVE, "RECEIVE"}};
 
     for (size_t i = 0; i < sizeof(keywords) / sizeof(keywords[0]); i++) {
         int type          = keywords[i].type;
@@ -81,7 +98,7 @@ static struct token tokenise_integer_literal(char *src) {
 
     int negative = *src == '-';
 
-    char *test = negative ? src + 1 : src;
+    char *test    = negative ? src + 1 : src;
     size_t length = negative ? 1 : 0;
     char c;
     while ((c = *test++)) {
@@ -91,9 +108,9 @@ static struct token tokenise_integer_literal(char *src) {
     }
 
     if (length == 0 || (negative && length == 1)) return res;
-    
-    res.type = TOKEN_INTEGER_LITERAL;
-    res.value = src;
+
+    res.type   = TOKEN_INTEGER_LITERAL;
+    res.value  = src;
     res.length = length;
     return res;
 }
@@ -141,7 +158,7 @@ struct token *tokenise(char *src) {
             return NULL;
         }
 
-        if (count + 1 >= cap) { /* + 1 for TOKEN_END */
+        if (count + 1 >= cap) { /* + 1 for TOKEN_EOF */
             cap *= 2;
             struct token *new = realloc(buf, sizeof(struct token) * cap);
             if (!new) {
@@ -160,7 +177,7 @@ struct token *tokenise(char *src) {
         char_no += longest.length;
     }
 
-    buf[count] = (struct token){.type = TOKEN_END};
+    buf[count] = (struct token){.type = TOKEN_EOF};
 
     return buf;
 }

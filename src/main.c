@@ -17,7 +17,7 @@ int main(void) {
     }
 
     struct token *cur = tokens;
-    while (cur->type != TOKEN_END) {
+    while (cur->type != TOKEN_EOF) {
         char buf[1024] = {0};
         strncpy(buf, cur->value, cur->length);
         printf("type = %d | value = %s | length = %zu | line_no = %zu | char_no = %zu\n", cur->type, buf, cur->length, cur->line_no, cur->char_no);
